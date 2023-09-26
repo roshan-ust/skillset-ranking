@@ -1,16 +1,8 @@
-import {useState} from "react";
-
-export default function InputField(props){
-    const [inputValue, setInputValue] = useState("");
-
-    const handleChange = (event) =>{
-        setInputValue(event.target.value);
-    };
-
-    return(
+export default function InputField(props) {
+    return (
         <>
-        <label>{props.label}</label>
-        <input type="text" value={inputValue} onChange={handleChange}/>
+            <label>{props.label}</label>
+            <input type="text" name={props.name} value={props.value} onChange={props.handleChange} />
         </>
     )
 }
