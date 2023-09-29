@@ -1,8 +1,32 @@
-header{
+header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 0 5px #bcc2e8;
+}
+
+header .home-nav {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
+
+header .menu-items {
+  margin-right: 30px;
+}
+
+header .menu-items li {
+  list-style: none;
+  text-decoration: underline;
+}
+
+header .menu-items li:hover {
+  color: blueviolet;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 .App {
   text-align: center;
 }
@@ -37,7 +61,13 @@ header{
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
 }

@@ -3,24 +3,31 @@ import EmployeeDetails from "./components/EmployeeDetails";
 import logo from './logo.svg';
 import './App.css';
 
+const contentStyle = {
+  width: '100%',
+  height: '100%'
+}
+
 function App() {
   return (
-    <div>
+    <div className="h-100 d-flex flex-column">
       <header>
-        <div>
+        <div className="home-nav">
           <a>
             <img src={logo} className="App-logo" alt="logo" />
           </a>
           <h1>Employee Details</h1>
         </div>
-        <ul>
+        <ul className="menu-items">
           <li>Add</li>
         </ul>
       </header>
-      <Routes>
-        <Route path="/" element={<Navigate replace to="/employee" />} />
-        <Route path="employee/*" element={<EmployeeDetails />} />
-      </Routes>
+      <div style={contentStyle}>
+        <Routes>
+          <Route path="/" element={<Navigate replace to="/employee" />} />
+          <Route path="employee/*" element={<EmployeeDetails />} />
+        </Routes>
+      </div>
       <footer></footer>
     </div>
   );
