@@ -1,11 +1,19 @@
 export default class Employee {
-    constructor(id = '', name = '', uid = '', email = '', account = '', reportingManager = '', skillsets = '') {
-        this.id = id;
-        this.name = name;
-        this.uid = uid;
-        this.email = email;
-        this.account = account;
-        this.reportingManager = reportingManager;
-        this.skillsets = skillsets;
+    id = '';
+    name = '';
+    uid = '';
+    email = '';
+    account = '';
+    reportingManager = '';
+    skillsets = '';
+
+    constructor(employee) {
+        this.id = employee?.id ?? '';
+        this.name = employee?.name ?? '';
+        this.uid = employee?.uid ?? '';
+        this.email = employee?.email ?? '';
+        this.account = employee?.account ?? '';
+        this.reportingManager = employee?.reportingManager ?? '';
+        this.skillsets = employee?.skillsets ?? '';
     }
 }

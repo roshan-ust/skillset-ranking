@@ -1,3 +1,4 @@
+import React from 'react';
 import useUpdateForm from '../hooks/useUpdateForm';
 import InputField from './form/input-field';
 import Employee from '../models/employee';
@@ -14,8 +15,7 @@ const addForm = {
     gap: '10px'
 }
 
-export default function AddEmployee() {
-
+const AddEmployee = () => {
     const { formData, changeField, handleSubmit } = useUpdateForm(new Employee());
 
     return (
@@ -33,3 +33,5 @@ export default function AddEmployee() {
         </>
     )
 }
+
+export default AddEmployee;

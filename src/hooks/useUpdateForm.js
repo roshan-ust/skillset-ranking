@@ -1,30 +1,26 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import { addEmployee } from '../services/skillsetService';
 import Employee from '../models/employee';
 
 function useUpdateForm(initValue = {}) {
     const [formData, setFormData] = useState(initValue);
 
-    useEffect(() => {
-        console.log(formData);
-    });
-
     const changeField = (e) => {
-        let formObject = { ...formData };
-        console.log({ ...formObject, [e.target.name]: e.target.value });
-        setFormData({ ...formObject, [e.target.name]: e.target.value });
+        setFormData(currData => {
+            currData[e.target.name] = e.target.value;
+            return new Employee(currData);
+        });
     }
 
-    const resetForm = (initialValue) => {
-        let formObject = { ...formData };
-        setFormData({ ...formObject, ...initialValue });
+    const resetForm = () => {
+        setFormData(new Employee());
     }
 
-    const handleSubmit = useCallback(async (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         await addEmployee(formData);
         resetForm(new Employee());
-    }, []);
+    };
 
     return { formData, changeField, resetForm, handleSubmit };
 

@@ -1,4 +1,4 @@
-import { Navigate, Routes, Route } from "react-router-dom";
+import { Navigate, Routes, Route, Link } from "react-router-dom";
 import EmployeeDetails from "./components/EmployeeDetails";
 import logo from './logo.svg';
 import './App.css';
@@ -19,7 +19,7 @@ function App() {
           <h1>Employee Details</h1>
         </div>
         <ul className="menu-items">
-          <li>Add</li>
+          <Link path="/employee">Add</Link>
         </ul>
       </header>
       <div style={contentStyle}>
