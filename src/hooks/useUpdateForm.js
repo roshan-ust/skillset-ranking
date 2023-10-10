@@ -5,10 +5,31 @@ import Employee from '../models/employee';
 function useUpdateForm(initValue = {}) {
     const [formData, setFormData] = useState(initValue);
 
+    const updateFormDataValue = (data, name, value) => {
+        return new Employee({ ...data, [name]: value });
+    }
+
     const changeField = (e) => {
+        let { name, value } = e.target;
         setFormData(currData => {
-            currData[e.target.name] = e.target.value;
-            return new Employee(currData);
+            return updateFormDataValue({ ...currData }, name, value);
+        });
+    }
+
+    const changeSelectField = (e) => {
+        let { name, value } = e.target;
+        let currentValue = formData[name];
+        if (!currentValue.includes(value)) {
+            if (currentValue) {
+                currentValue += `, ${value}`;
+            }
+            else {
+                currentValue = value;
+            }
+        }
+
+        setFormData(currData => {
+            return updateFormDataValue({ ...currData }, name, currentValue);
         });
     }
 
@@ -22,7 +43,7 @@ function useUpdateForm(initValue = {}) {
         resetForm(new Employee());
     };
 
-    return { formData, changeField, resetForm, handleSubmit };
+    return { formData, changeField, changeSelectField, resetForm, handleSubmit };
 
 }
 

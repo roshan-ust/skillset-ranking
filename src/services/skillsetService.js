@@ -9,3 +9,12 @@ export async function addEmployee(employee) {
         body: JSON.stringify({ ...employee, id: 0 }),
     });
 }
+
+export async function getAllSkills() {
+    return fetch(API_URL + 'skills', {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    });
+}

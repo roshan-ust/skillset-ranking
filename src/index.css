@@ -18,22 +18,6 @@ div#root {
   height: 100%;
 }
 
-.d-flex {
-  display: flex;
-}
-
-.flex-column {
-  flex-direction: column;
-}
-
-.flex-row {
-  flex-direction: row;
-}
-
-.h-100 {
-  height: 100%;
-}
-
-.w-100 {
-  width: 100%;
+.cursor-pointer {
+  cursor: pointer;
 }
