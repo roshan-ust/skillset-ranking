@@ -1,10 +1,10 @@
 import React from "react";
 
 export default React.memo((props) => (
-    <>
-        <label className="form-label">{props.label}</label>
-        <input className="form-control" title={props.name} type="text" name={props.name} value={props.value} onChange={props.handleChange} />
-    </>
+    <div className="form-floating w-100">
+        <input type="text" className="form-control" id={props.name} title={props.name} name={props.name} value={props.value} onChange={props.handleChange} />
+        <label htmlFor={props.name}>{props.label}</label>
+    </div>
 ), (prevProps, nextProps) => {
     return prevProps.value === nextProps.value;
 });

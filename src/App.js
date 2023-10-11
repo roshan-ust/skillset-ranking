@@ -11,7 +11,7 @@ const contentStyle = {
 function App() {
   return (
     <div className="h-100 d-flex flex-column">
-      <header>
+      <header className="d-flex flex-row align-items-center justify-content-between px-2 py-3">
         <div className="home-nav">
           <a>
             <img src={logo} className="App-logo" alt="logo" />
@@ -22,7 +22,7 @@ function App() {
           <Link path="/employee">Add</Link>
         </ul>
       </header>
-      <div style={contentStyle}>
+      <div style={contentStyle} className="bg-light">
         <Routes>
           <Route path="/" element={<Navigate replace to="/employee" />} />
           <Route path="employee/*" element={<EmployeeDetails />} />
