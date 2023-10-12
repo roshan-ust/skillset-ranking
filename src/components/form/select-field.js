@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import * as Constants from '../../common/constants';
 
 const SelectField = (props) => {
@@ -6,27 +6,35 @@ const SelectField = (props) => {
 
     const handleSelectionAddition = (e) => {
         const { name, value } = e.target;
-        setSelectedCount((count) => ++count);
+        setSelectedCount((count) => Math.min(count + 1, props.options.length));
         value && props.handleChange(name, value, Constants.SELECT_ADD);
     }
 
     const handleSelectionDeletion = (value) => {
-        setSelectedCount((count) => --count);
+        setSelectedCount((count) => Math.max(count - 1, 0));
         props.handleChange(props.name, value, Constants.SELECT_DELETE);
     }
+
+    const filterOptions = useMemo(() => {
+        return props.options.filter((option) => !(props.value.includes(`${option.name},`) || props.value.includes(`, ${option.name}`) || props.value === option.name));
+    }, [props.options, selectedCount]);
+
+    const unselectedOptions = props.options.length === 0 ?
+        [] : filterOptions;
+
 
     return (
         <div className="select-input w-100">
             <div className="form-floating">
-                <select disabled={selectedCount && selectedCount === props.skills.length} name={props.name} title={props.name}
+                <select disabled={selectedCount && selectedCount === props.options.length} name={props.name} title={props.name}
                     className="form-select" onChange={handleSelectionAddition} id={props.name} aria-label={props.label}>
                     <option hidden={props.value} defaultValue={''} value=''>-- select --</option>
                     {
-                        props.skills.filter((skill) => !(props.value.includes(`${skill.name},`) || props.value.includes(`, ${skill.name}`) || props.value === skill.name))
-                            .map(skill =>
-                            (
-                                <option key={skill.id} value={skill.name}>{skill.name}</option>
-                            ))
+
+                        unselectedOptions.map(option =>
+                        (
+                            <option key={option.id} value={option.name}>{option.name}</option>
+                        ))
                     }
                 </select>
                 <label htmlFor={props.name} className="mb-2">{props.label}</label>
@@ -54,5 +62,5 @@ const SelectField = (props) => {
 }
 
 export default React.memo(SelectField, (prevProps, nextProps) => {
-    return prevProps.value === nextProps.value && prevProps.skills.length === nextProps.skills.length;
+    return prevProps.value === nextProps.value && prevProps.options.length === nextProps.options.length;
 });
